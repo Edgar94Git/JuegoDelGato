@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id ("com.google.gms.google-services")
+    id ("kotlin-kapt")
+    id ("com.google.dagger.hilt.android")
 }
 
 android {
@@ -27,6 +30,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            resValue("string", "app_name", "Gato")
+        }
+        debug {
+            isDebuggable = true
+            applicationIdSuffix = ".debug"
+            resValue("string", "app_name", "[Debug] - Gato")
         }
     }
     compileOptions {
@@ -38,6 +47,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -59,6 +69,19 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation("androidx.compose.material:material:1.5.0")
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:31.4.0"))
+    implementation ("com.google.firebase:firebase-database-ktx")
+
+    implementation ("com.google.dagger:hilt-android:2.44.2")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
+    kapt("com.google.dagger:hilt-compiler:2.44.2")
+
+    //Navigation
+    implementation ("androidx.navigation:navigation-compose:2.7.0")
+    androidTestImplementation ("androidx.navigation:navigation-testing:2.7.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
