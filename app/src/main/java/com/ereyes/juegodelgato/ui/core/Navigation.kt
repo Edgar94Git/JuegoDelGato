@@ -34,6 +34,6 @@ fun ContentWrapper(navigationController: NavHostController) {
 }
 
 sealed class Routes(val route: String) {
-    data object Home : Routes("home")
-    data object Game : Routes("game")
+    object Home : Routes("home")
+    object Game : Routes("game")
 }

@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import com.ereyes.juegodelgato.data.model.GameData
 import com.ereyes.juegodelgato.data.model.PlayerData
 import com.ereyes.juegodelgato.data.network.FirebaseService
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
