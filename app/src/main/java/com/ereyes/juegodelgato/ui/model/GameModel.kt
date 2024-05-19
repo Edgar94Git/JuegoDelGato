@@ -1,5 +1,8 @@
 package com.ereyes.juegodelgato.ui.model
 
+import com.ereyes.juegodelgato.data.model.GameData
+import com.ereyes.juegodelgato.data.model.PlayerData
+
 /****
  * Project: JuegoDelGato
  * From: com.ereyes.juegodelgato.ui.model
@@ -11,10 +14,29 @@ data class GameModel(
     val player1: PlayerModel,
     val player2: PlayerModel? = null,
     val playerTurn: PlayerModel,
-    val gameId: String
-)
+    val gameId: String,
+    val isGameReady: Boolean = false,
+    val isMyTurn: Boolean = false
+) {
+    fun toData(): GameData {
+        return GameData(
+            board = board.map { it.id },
+            gameId = gameId,
+            player1 = player1.toData(),
+            player2 = player2?.toData(),
+            playerTurn = playerTurn.toData()
+        )
+    }
+}
 
-data class PlayerModel(val userId: String, val playerType: PlayerType)
+data class PlayerModel(val userId: String, val playerType: PlayerType) {
+    fun toData(): PlayerData {
+        return PlayerData(
+            userId = userId,
+            playerType = playerType.id
+        )
+    }
+}
 
 sealed class PlayerType(val id: Int, val symbol: String){
     object FirstPlayer: PlayerType(2, "X")
